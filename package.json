@@ -1,0 +1,17 @@
+{
+  "name": "typescript-playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts"
+  },
+  "keywords": ["typescript", "playground"],
+  "author": "pchmn",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.4.2",
+    "tsx": "^3.12.7"
+  }
+}
