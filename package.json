@@ -4,14 +4,21 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start": "tsx src/index.ts",
-    "dev": "tsx watch src/index.ts"
+    "start": "tsup src/index.ts && node dist/index.js",
+    "dev": "tsup src/index.ts --watch --onSuccess \"node dist/index.js\""
   },
-  "keywords": ["typescript", "playground"],
+  "keywords": [
+    "typescript",
+    "playground"
+  ],
   "author": "pchmn",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.4.2",
+    "tsup": "^7.1.0",
     "tsx": "^3.12.7"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.0.2"
   }
 }
