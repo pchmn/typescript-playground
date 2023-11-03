@@ -3,15 +3,24 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts"
   },
-  "keywords": ["typescript", "playground"],
+  "keywords": [
+    "typescript",
+    "playground"
+  ],
   "author": "pchmn",
   "license": "MIT",
   "devDependencies": {
+    "@types/color": "^3.0.5",
     "@types/node": "^20.4.2",
     "tsx": "^3.12.7"
+  },
+  "dependencies": {
+    "@material/material-color-utilities": "^0.2.7",
+    "color": "^4.2.3"
   }
 }
