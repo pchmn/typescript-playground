@@ -4,7 +4,7 @@ import {
   argbFromHex,
   themeFromSourceColor,
 } from "@material/material-color-utilities";
-import { default as Color, default as color } from "color";
+import { default as color } from "color";
 
 enum ElevationLevels {
   "level0",
@@ -69,6 +69,8 @@ export type Material3Scheme = SystemScheme & {
   surfaceDim: string;
   surfaceTint: string;
 
+  outlineVariant: string;
+
   elevation: {
     [key in keyof typeof ElevationLevels]: string;
   };
@@ -86,7 +88,7 @@ const opacity = {
   level4: 0.38,
 };
 
-const elevations = ["transparent", 0.05, 0.08, 0.11, 0.12, 0.14];
+const elevations = ["transparent", 0.03, 0.08, 0.11, 0.12, 0.14];
 
 type Palettes = {
   primary: TonalPalette;
@@ -125,52 +127,50 @@ function generateMissingFields(
       [`level${index}`]:
         index === 0
           ? value
-          : color(`hsl(${scheme.surface.replaceAll(" ", ",")})`)
-              .mix(
-                color(`hsl(${scheme.primary.replaceAll(" ", ",")})`),
-                Number(value)
-              )
+          : color(scheme.surface)
+              .mix(color(scheme.primary), Number(value))
               .hex(),
     }),
     {}
   ) as Material3Scheme["elevation"];
 
   const customColors = {
-    surfaceDisabled: toHslString(
-      color(`hsl(${scheme.onSurface.replaceAll(" ", ",")})`).alpha(
-        opacity.level2
-      )
-    ),
-    onSurfaceDisabled: toHslString(
-      color(`hsl(${scheme.onSurface.replaceAll(" ", ",")})`).alpha(
-        opacity.level4
-      )
-    ),
-    backdrop: toHslString(color(palettes.neutralVariant.tone(20)).alpha(0.4)),
-    surfaceContainer: toHslString(
-      color(palettes.neutral.tone(colorScheme === "dark" ? 12 : 94))
-    ),
-    surfaceContainerLow: toHslString(
-      color(palettes.neutral.tone(colorScheme === "dark" ? 10 : 96))
-    ),
-    surfaceContainerLowest: toHslString(
-      color(palettes.neutral.tone(colorScheme === "dark" ? 4 : 100))
-    ),
-    surfaceContainerHigh: toHslString(
-      color(palettes.neutral.tone(colorScheme === "dark" ? 17 : 92))
-    ),
-    surfaceContainerHighest: toHslString(
-      color(palettes.neutral.tone(colorScheme === "dark" ? 22 : 90))
-    ),
-    surfaceBright: toHslString(
-      color(palettes.neutral.tone(colorScheme === "dark" ? 24 : 98))
-    ),
-    surfaceDim: toHslString(
-      color(palettes.neutral.tone(colorScheme === "dark" ? 6 : 87))
-    ),
-    surfaceContainerLower: toHslString(
-      color(palettes.neutral.tone(colorScheme === "dark" ? 16 : 97))
-    ),
+    surfaceDisabled: color(scheme.onSurface)
+      .alpha(opacity.level2)
+      .rgb()
+      .string(),
+    onSurfaceDisabled: color(scheme.onSurface)
+      .alpha(opacity.level4)
+      .rgb()
+      .string(),
+    backdrop: color(palettes.neutralVariant.tone(20)).alpha(0.4).rgb().string(),
+    surfaceContainer: color(
+      palettes.neutral.tone(colorScheme === "dark" ? 12 : 94)
+    ).hex(),
+    surfaceContainerLow: color(
+      palettes.neutral.tone(colorScheme === "dark" ? 10 : 96)
+    ).hex(),
+    surfaceContainerLowest: color(
+      palettes.neutral.tone(colorScheme === "dark" ? 4 : 100)
+    ).hex(),
+    surfaceContainerHigh: color(
+      palettes.neutral.tone(colorScheme === "dark" ? 17 : 92)
+    ).hex(),
+    surfaceContainerHighest: color(
+      palettes.neutral.tone(colorScheme === "dark" ? 22 : 90)
+    ).hex(),
+    surfaceBright: color(
+      palettes.neutral.tone(colorScheme === "dark" ? 24 : 98)
+    ).hex(),
+    surfaceDim: color(
+      palettes.neutral.tone(colorScheme === "dark" ? 6 : 87)
+    ).hex(),
+    outlineVariant: color(
+      palettes.neutralVariant.tone(colorScheme === "dark" ? 30 : 80)
+    ).hex(),
+    surfaceContainerLower: color(
+      palettes.neutral.tone(colorScheme === "dark" ? 16 : 97)
+    ).hex(),
     surfaceTint: scheme.primary,
   };
 
@@ -194,12 +194,12 @@ function transformScheme(scheme: Scheme) {
   return Object.entries(jsonScheme).reduce((acc, [key, value]) => {
     return {
       ...acc,
-      [key]: toHslString(color(value)),
+      [key]: color(value).hex(),
     };
   }, {} as { [key in SchemeKeys]: string });
 }
 
-function toHslString(color: Color) {
+export function toHslString(color: color) {
   return color
     .hsl()
     .round()

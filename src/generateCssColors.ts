@@ -1,3 +1,6 @@
+import Color from "color";
+import { toHslString } from "./createMaterial3Theme.js";
+
 interface ColorScheme {
   background: string;
   foreground: string;
@@ -26,6 +29,13 @@ interface CssColors {
 }
 
 export function generateCssColors(colors: CssColors) {
+  let key: keyof typeof colors.light;
+  for (key in colors.light) {
+    if (key === "radius") continue;
+    colors.light[key] = toHslString(Color(colors.light[key]));
+    colors.dark[key] = toHslString(Color(colors.dark[key]));
+  }
+
   return `
 @layer base {
   :root {

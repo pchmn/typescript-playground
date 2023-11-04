@@ -3,33 +3,33 @@ import {
   argbFromHex,
   themeFromSourceColor,
 } from "@material/material-color-utilities";
-import color from "color";
+import { default as Color, default as color } from "color";
 import { createThemeFromSourceColor } from "./createMaterial3Theme.js";
 import { generateCssColors } from "./generateCssColors.js";
 
 function main() {
-  const { light, dark } = createThemeFromSourceColor("#9CD67D");
+  const { light, dark } = createThemeFromSourceColor("#E5DFFF");
 
   const cssColors = generateCssColors({
     light: {
       background: light.background,
       foreground: light.onBackground,
-      card: light.surfaceContainerLower,
+      card: "#fff",
       cardForeground: light.onSurface,
-      popover: light.surfaceContainerLower,
+      popover: "#fff",
       popoverForeground: light.onSurface,
       primary: light.primary,
       primaryForeground: light.onPrimary,
       secondary: light.secondary,
       secondaryForeground: light.onSecondary,
       muted: light.onSecondary,
-      mutedForeground: light.secondary,
-      accent: light.secondaryContainer,
-      accentForeground: light.onSecondaryContainer,
+      mutedForeground: light.outline,
+      accent: Color(light.surfaceVariant).lighten(0.05).hex(),
+      accentForeground: light.onSurfaceVariant,
       destructive: light.error,
       destructiveForeground: light.onError,
-      border: light.surfaceVariant,
-      input: light.surfaceVariant,
+      border: Color(light.surfaceVariant).lighten(0.03).hex(),
+      input: Color(light.surfaceVariant).lighten(0.03).hex(),
       ring: light.primary,
       radius: "0.75rem",
     },
@@ -45,13 +45,13 @@ function main() {
       secondary: dark.secondary,
       secondaryForeground: dark.onSecondary,
       muted: dark.onSecondary,
-      mutedForeground: dark.secondary,
-      accent: dark.secondaryContainer,
-      accentForeground: dark.onSecondaryContainer,
+      mutedForeground: dark.outline,
+      accent: Color(dark.surfaceVariant).darken(0.2).hex(),
+      accentForeground: dark.onSurfaceVariant,
       destructive: dark.error,
       destructiveForeground: dark.onError,
-      border: dark.surfaceVariant,
-      input: dark.surfaceVariant,
+      border: Color(dark.surfaceVariant).darken(0.2).hex(),
+      input: Color(dark.surfaceVariant).darken(0.2).hex(),
       ring: dark.primary,
     },
   });
