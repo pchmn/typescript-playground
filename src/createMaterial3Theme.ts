@@ -169,7 +169,7 @@ function generateMissingFields(
       palettes.neutralVariant.tone(colorScheme === "dark" ? 30 : 80)
     ).hex(),
     surfaceContainerLower: color(
-      palettes.neutral.tone(colorScheme === "dark" ? 16 : 97)
+      palettes.neutral.tone(colorScheme === "dark" ? 13 : 97)
     ).hex(),
     surfaceTint: scheme.primary,
   };

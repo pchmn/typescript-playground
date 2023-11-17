@@ -9,6 +9,7 @@ import { generateCssColors } from "./generateCssColors.js";
 
 function main() {
   const { light, dark } = createThemeFromSourceColor("#E5DFFF");
+  console.log("card", dark.surfaceContainerLower);
 
   const cssColors = generateCssColors({
     light: {
@@ -24,12 +25,12 @@ function main() {
       secondaryForeground: light.onSecondary,
       muted: light.onSecondary,
       mutedForeground: light.outline,
-      accent: Color(light.surfaceVariant).lighten(0.05).hex(),
+      accent: Color(light.surfaceVariant).hex(),
       accentForeground: light.onSurfaceVariant,
       destructive: light.error,
       destructiveForeground: light.onError,
-      border: Color(light.surfaceVariant).lighten(0.03).hex(),
-      input: Color(light.surfaceVariant).lighten(0.03).hex(),
+      border: Color(light.surfaceVariant).hex(),
+      input: Color(light.surfaceVariant).hex(),
       ring: light.primary,
       radius: "0.75rem",
     },
@@ -46,17 +47,17 @@ function main() {
       secondaryForeground: dark.onSecondary,
       muted: dark.onSecondary,
       mutedForeground: dark.outline,
-      accent: Color(dark.surfaceVariant).darken(0.2).hex(),
+      accent: Color(dark.surfaceVariant).darken(0.1).hex(),
       accentForeground: dark.onSurfaceVariant,
       destructive: dark.error,
       destructiveForeground: dark.onError,
-      border: Color(dark.surfaceVariant).darken(0.2).hex(),
-      input: Color(dark.surfaceVariant).darken(0.2).hex(),
+      border: Color(dark.surfaceVariant).darken(0.1).hex(),
+      input: Color(dark.surfaceVariant).darken(0.1).hex(),
       ring: dark.primary,
     },
   });
 
-  console.log(JSON.stringify({ light, dark }, null, 2));
+  // console.log(JSON.stringify({ light, dark }, null, 2));
   console.log(cssColors);
 }
 
