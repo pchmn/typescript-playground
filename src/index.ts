@@ -8,7 +8,10 @@ import { createThemeFromSourceColor } from "./createMaterial3Theme.js";
 import { generateCssColors } from "./generateCssColors.js";
 
 function main() {
-  const { light, dark } = createThemeFromSourceColor("#E5DFFF");
+  const { light, dark } = createThemeFromSourceColor("#FFE4E3");
+  light.primary = Color(light.primary).lighten(0.1).hex();
+  dark.error = Color(light.error).darken(0.1).hex();
+  light.error = Color(light.error).lighten(0.25).hex();
   console.log("card", dark.surfaceContainerLower);
 
   const cssColors = generateCssColors({
@@ -32,7 +35,7 @@ function main() {
       border: Color(light.surfaceVariant).lighten(0.05).hex(),
       input: Color(light.surfaceVariant).hex(),
       ring: light.primary,
-      radius: "0.75rem",
+      radius: "0.6rem",
     },
     dark: {
       background: dark.background,
