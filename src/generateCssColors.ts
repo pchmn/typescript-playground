@@ -1,26 +1,27 @@
 import Color from "color";
-import { toHslString } from "./createMaterial3Theme.js";
 
 interface ColorScheme {
-  background: string;
-  foreground: string;
-  card: string;
-  cardForeground: string;
-  popover: string;
-  popoverForeground: string;
-  primary: string;
-  primaryForeground: string;
-  secondary: string;
-  secondaryForeground: string;
-  muted: string;
-  mutedForeground: string;
-  accent: string;
-  accentForeground: string;
-  destructive: string;
-  destructiveForeground: string;
-  border: string;
-  input: string;
-  ring: string;
+  background: string | number;
+  foreground: string | number;
+  card: string | number;
+  cardForeground: string | number;
+  popover: string | number;
+  popoverForeground: string | number;
+  primary: string | number;
+  primaryForeground: string | number;
+  secondary: string | number;
+  secondaryForeground: string | number;
+  tertiary: string | number;
+  tertiaryForeground: string | number;
+  muted: string | number;
+  mutedForeground: string | number;
+  accent: string | number;
+  accentForeground: string | number;
+  destructive: string | number;
+  destructiveForeground: string | number;
+  border: string | number;
+  input: string | number;
+  ring: string | number;
 }
 
 interface CssColors {
@@ -32,8 +33,16 @@ export function generateCssColors(colors: CssColors) {
   let key: keyof typeof colors.light;
   for (key in colors.light) {
     if (key === "radius") continue;
-    colors.light[key] = toHslString(Color(colors.light[key]));
-    colors.dark[key] = toHslString(Color(colors.dark[key]));
+    // colors.light[key] = toHslString(Color(colors.light[key]));
+    // colors.dark[key] = toHslString(Color(colors.dark[key]));
+    colors.light[key] = Color(colors.light[key])
+      .rgb()
+      .string()
+      .replace(/(rgb\(|\)|,)/g, "");
+    colors.dark[key] = Color(colors.dark[key])
+      .rgb()
+      .string()
+      .replace(/(rgb\(|\)|,)/g, "");
   }
 
   return `
@@ -49,6 +58,8 @@ export function generateCssColors(colors: CssColors) {
     --primary-foreground: ${colors.light.primaryForeground};
     --secondary: ${colors.light.secondary};
     --secondary-foreground: ${colors.light.secondaryForeground};
+    --tertiary: ${colors.light.tertiary};
+    --tertiary-foreground: ${colors.light.tertiaryForeground};
     --muted: ${colors.light.muted};
     --muted-foreground: ${colors.light.mutedForeground};
     --accent: ${colors.light.accent};
@@ -72,6 +83,8 @@ export function generateCssColors(colors: CssColors) {
     --primary-foreground: ${colors.dark.primaryForeground};
     --secondary: ${colors.dark.secondary};
     --secondary-foreground: ${colors.dark.secondaryForeground};
+    --tertiary: ${colors.dark.tertiary};
+    --tertiary-foreground: ${colors.dark.tertiaryForeground};
     --muted: ${colors.dark.muted};
     --muted-foreground: ${colors.dark.mutedForeground};
     --accent: ${colors.dark.accent};

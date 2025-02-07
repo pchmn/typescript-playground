@@ -1,65 +1,70 @@
 import {
-  Scheme,
   argbFromHex,
+  Scheme,
   themeFromSourceColor,
 } from "@material/material-color-utilities";
-import { default as Color, default as color } from "color";
-import { createThemeFromSourceColor } from "./createMaterial3Theme.js";
-import { generateCssColors } from "./generateCssColors.js";
+import { default as color } from "color";
+import { generateShadcnUiColors, Variant } from "./shadcnUiColors.js";
 
 function main() {
-  const { light, dark } = createThemeFromSourceColor("#FFE4E3");
-  light.primary = Color(light.primary).lighten(0.1).hex();
-  dark.error = Color(light.error).darken(0.1).hex();
-  light.error = Color(light.error).lighten(0.25).hex();
-  console.log("card", dark.surfaceContainerLower);
+  // const { light, dark } = createThemeFromSourceColor("#F0A8D0");
+  // // light.primary = Color(light.primary).lighten(0.1).hex();
+  // // dark.error = Color(light.error).darken(0.1).hex();
+  // dark.error = Color(light.error).lighten(0.2).hex();
+  // light.error = Color(light.error).lighten(0.45).hex();
+  // console.log("card", dark.surfaceContainerLower);
 
-  const cssColors = generateCssColors({
-    light: {
-      background: light.background,
-      foreground: light.onBackground,
-      card: "#fff",
-      cardForeground: light.onSurface,
-      popover: "#fff",
-      popoverForeground: light.onSurface,
-      primary: light.primary,
-      primaryForeground: light.onPrimary,
-      secondary: light.secondary,
-      secondaryForeground: light.onSecondary,
-      muted: light.onSecondary,
-      mutedForeground: light.outline,
-      accent: Color(light.surfaceVariant).hex(),
-      accentForeground: light.onSurfaceVariant,
-      destructive: light.error,
-      destructiveForeground: light.onError,
-      border: Color(light.surfaceVariant).lighten(0.05).hex(),
-      input: Color(light.surfaceVariant).hex(),
-      ring: light.primary,
-      radius: "0.6rem",
-    },
-    dark: {
-      background: dark.background,
-      foreground: dark.onBackground,
-      card: dark.surfaceContainerLower,
-      cardForeground: dark.onSurface,
-      popover: dark.surfaceContainerLower,
-      popoverForeground: dark.onSurface,
-      primary: dark.primary,
-      primaryForeground: dark.onPrimary,
-      secondary: dark.secondary,
-      secondaryForeground: dark.onSecondary,
-      muted: dark.onSecondary,
-      mutedForeground: dark.outline,
-      accent: Color(dark.surfaceVariant).darken(0.1).hex(),
-      accentForeground: dark.onSurfaceVariant,
-      destructive: dark.error,
-      destructiveForeground: dark.onError,
-      border: Color(dark.surfaceVariant).darken(0.3).hex(),
-      input: Color(dark.surfaceVariant).darken(0.1).hex(),
-      ring: dark.primary,
-    },
-  });
+  // const cssColors = generateCssColors({
+  //   light: {
+  //     background: light.background,
+  //     foreground: light.onBackground,
+  //     card: "#fff",
+  //     cardForeground: light.onSurface,
+  //     popover: "#fff",
+  //     popoverForeground: light.onSurface,
+  //     primary: light.primary,
+  //     primaryForeground: light.onPrimary,
+  //     secondary: light.secondary,
+  //     secondaryForeground: light.onSecondary,
+  //     tertiary: light.tertiary,
+  //     tertiaryForeground: light.onTertiary,
+  //     muted: light.onSecondary,
+  //     mutedForeground: light.outline,
+  //     accent: Color(light.surfaceVariant).hex(),
+  //     accentForeground: light.onSurfaceVariant,
+  //     destructive: light.error,
+  //     destructiveForeground: light.onError,
+  //     border: Color(light.surfaceVariant).lighten(0.05).hex(),
+  //     input: Color(light.surfaceVariant).hex(),
+  //     ring: light.primary,
+  //     radius: "0.6rem",
+  //   },
+  //   dark: {
+  //     background: dark.background,
+  //     foreground: dark.onBackground,
+  //     card: dark.surfaceContainerLower,
+  //     cardForeground: dark.onSurface,
+  //     popover: dark.surfaceContainerLower,
+  //     popoverForeground: dark.onSurface,
+  //     primary: dark.primary,
+  //     primaryForeground: dark.onPrimary,
+  //     secondary: dark.secondary,
+  //     secondaryForeground: dark.onSecondary,
+  //     tertiary: dark.tertiary,
+  //     tertiaryForeground: dark.onTertiary,
+  //     muted: dark.onSecondary,
+  //     mutedForeground: dark.outline,
+  //     accent: Color(dark.surfaceVariant).darken(0.1).hex(),
+  //     accentForeground: dark.onSurfaceVariant,
+  //     destructive: dark.error,
+  //     destructiveForeground: dark.onError,
+  //     border: Color(dark.surfaceVariant).darken(0.3).hex(),
+  //     input: Color(dark.surfaceVariant).darken(0.1).hex(),
+  //     ring: dark.primary,
+  //   },
+  // });
 
+  const cssColors = generateShadcnUiColors("#F0A8D0", Variant.TONAL_SPOT);
   // console.log(JSON.stringify({ light, dark }, null, 2));
   console.log(cssColors);
 }

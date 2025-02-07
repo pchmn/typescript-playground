@@ -179,6 +179,7 @@ function generateMissingFields(
 
 function generateSchemesFromSourceColor(sourceColor: string) {
   const { schemes, palettes } = themeFromSourceColor(argbFromHex(sourceColor));
+  console.log("schemes", schemes);
 
   return {
     light: transformScheme(schemes.light),
